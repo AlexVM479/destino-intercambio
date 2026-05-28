@@ -1,0 +1,191 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background-color: #0f172a;
+    color: #f1f5f9;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  #root { min-height: 100vh; }
+}
+
+@layer utilities {
+  /* FIX: Space Grotesk must render at its natural proportions — no stretch/condense */
+  .font-display {
+    font-family: 'Space Grotesk', sans-serif;
+    font-stretch: normal;      /* prevent artificial width distortion */
+    font-optical-sizing: auto;
+  }
+
+  .no-select { user-select: none; -webkit-user-select: none; }
+
+  .bg-grid-pattern {
+    background-image:
+      linear-gradient(rgba(99,102,241,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(99,102,241,0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  .text-gradient-emerald {
+    background: linear-gradient(135deg, #10b981, #34d399);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .shimmer-bar {
+    background: linear-gradient(
+      90deg,
+      #10b981 0%, #34d399 40%, #6ee7b7 50%, #34d399 60%, #10b981 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 2s linear infinite;
+  }
+
+  .card-glass {
+    background: rgba(30,41,59,0.72);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(99,102,241,0.15);
+  }
+
+  .card-glass-light {
+    background: rgba(51,65,85,0.5);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(148,163,184,0.1);
+  }
+}
+
+/* ─── Keyframes ────────────────────────────────────────────── */
+
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position:  200% 0; }
+}
+
+@keyframes bounce_in {
+  0%   { transform: scale(1); }
+  30%  { transform: scale(1.22); }
+  55%  { transform: scale(0.91); }
+  75%  { transform: scale(1.10); }
+  90%  { transform: scale(0.97); }
+  100% { transform: scale(1); }
+}
+
+@keyframes pop_in {
+  0%   { transform: scale(0) rotate(-15deg); opacity: 0; }
+  70%  { transform: scale(1.12) rotate(4deg); opacity: 1; }
+  100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
+@keyframes modal_in {
+  0%   { transform: scale(0.88) translateY(18px); opacity: 0; }
+  100% { transform: scale(1) translateY(0);        opacity: 1; }
+}
+
+@keyframes confetti_fall {
+  0%   { transform: translateY(-10px) rotate(0deg) scale(1); opacity: 1; }
+  85%  { opacity: 0.8; }
+  100% { transform: translateY(310px) rotate(720deg) scale(0.5); opacity: 0; }
+}
+
+@keyframes pulse_glow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(16,185,129,0); }
+  50%       { box-shadow: 0 0 0 14px rgba(16,185,129,0.13); }
+}
+
+@keyframes slide_up {
+  0%   { transform: translateY(16px); opacity: 0; }
+  100% { transform: translateY(0);    opacity: 1; }
+}
+
+@keyframes milestone_pop {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(1.4); }
+  70%  { transform: scale(0.9); }
+  100% { transform: scale(1); }
+}
+
+/* ─── Animation classes ─────────────────────────────────────── */
+
+.luggage-bounce        { animation: bounce_in 0.6s cubic-bezier(0.36,0.07,0.19,0.97) forwards; }
+.animate-pop-in        { animation: pop_in 0.4s cubic-bezier(0.175,0.885,0.32,1.275) forwards; }
+.animate-modal-in      { animation: modal_in 0.3s cubic-bezier(0.175,0.885,0.32,1.275) forwards; }
+.animate-confetti-fall { animation: confetti_fall 1.3s ease-in forwards; }
+.animate-pulse-glow    { animation: pulse_glow 2s ease-in-out infinite; }
+.animate-slide-up      { animation: slide_up 0.35s ease-out forwards; }
+.animate-milestone-pop { animation: milestone_pop 0.5s cubic-bezier(0.36,0.07,0.19,0.97) forwards; }
+
+/* ─── Luggage fill animation ────────────────────────────────── */
+.luggage-fill-inner {
+  transition: height 0.6s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.4s ease;
+  transform-origin: bottom;
+}
+
+/* ─── Modal overlay ─────────────────────────────────────────── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  background: rgba(2,6,23,0.75);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+/* ─── Milestone glow ring ───────────────────────────────────── */
+.milestone-active-ring {
+  box-shadow: 0 0 0 2px rgba(16,185,129,0.6), 0 0 16px 4px rgba(16,185,129,0.2);
+}
+
+/* ─── Range slider — styled thumb, hide default appearance ─── */
+input[type='range'] {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+}
+input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #f1f5f9;
+  border: 2px solid #10b981;
+  box-shadow: 0 0 8px rgba(16,185,129,0.6);
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+input[type='range']::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+  box-shadow: 0 0 14px rgba(16,185,129,0.8);
+}
+input[type='range']::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #f1f5f9;
+  border: 2px solid #10b981;
+  box-shadow: 0 0 8px rgba(16,185,129,0.6);
+  cursor: pointer;
+}
+
+/* ─── Scrollbar ─────────────────────────────────────────────── */
+::-webkit-scrollbar       { width: 4px; }
+::-webkit-scrollbar-track { background: #1e293b; }
+::-webkit-scrollbar-thumb { background: #334155; border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: #475569; }
