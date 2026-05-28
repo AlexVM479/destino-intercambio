@@ -6,7 +6,6 @@ import {
 } from 'lucide-react'
 
 /* ─── Constants ────────────────────────────────────────────── */
-
 const STORAGE_KEY = 'destino_intercambio_v2'
 
 // iso = numeric ISO 3166-1 used by world-atlas TopoJSON
@@ -22,18 +21,193 @@ const DESTINATIONS = [
 ]
 
 const EXTRA_DESTINATIONS = [
-  { id: 'de', label: 'Alemania',    flag: 'DE', iso: 276 },
-  { id: 'pt', label: 'Portugal',    flag: 'PT', iso: 620 },
-  { id: 'br', label: 'Brasil',      flag: 'BR', iso: 76  },
-  { id: 'ca', label: 'Canadá',      flag: 'CA', iso: 124 },
-  { id: 'au', label: 'Australia',   flag: 'AU', iso: 36  },
-  { id: 'nl', label: 'Holanda',     flag: 'NL', iso: 528 },
-  { id: 'kr', label: 'Corea',       flag: 'KR', iso: 410 },
-  { id: 'gb', label: 'Reino Unido', flag: 'GB', iso: 826 },
-  { id: 'cn', label: 'China',       flag: 'CN', iso: 156 },
-  { id: 'th', label: 'Tailandia',   flag: 'TH', iso: 764 },
-  { id: 'nz', label: 'N. Zelanda',  flag: 'NZ', iso: 554 },
-  { id: 'co', label: 'Colombia',    flag: 'CO', iso: 170 },
+  { id: 'af', label: 'Afganistán',           flag: 'AF', iso: 4   },
+  { id: 'al', label: 'Albania',              flag: 'AL', iso: 8   },
+  { id: 'de', label: 'Alemania',             flag: 'DE', iso: 276 },
+  { id: 'ad', label: 'Andorra',              flag: 'AD', iso: 20  },
+  { id: 'ao', label: 'Angola',               flag: 'AO', iso: 24  },
+  { id: 'ag', label: 'Antigua y Barbuda',    flag: 'AG', iso: 28  },
+  { id: 'sa', label: 'Arabia Saudí',         flag: 'SA', iso: 682 },
+  { id: 'dz', label: 'Argelia',              flag: 'DZ', iso: 12  },
+  { id: 'am', label: 'Armenia',              flag: 'AM', iso: 51  },
+  { id: 'au', label: 'Australia',            flag: 'AU', iso: 36  },
+  { id: 'at', label: 'Austria',              flag: 'AT', iso: 40  },
+  { id: 'az', label: 'Azerbaiyán',           flag: 'AZ', iso: 31  },
+  { id: 'bd', label: 'Bangladesh',           flag: 'BD', iso: 50  },
+  { id: 'bb', label: 'Barbados',             flag: 'BB', iso: 52  },
+  { id: 'bh', label: 'Baréin',               flag: 'BH', iso: 48  },
+  { id: 'be', label: 'Bélgica',              flag: 'BE', iso: 56  },
+  { id: 'bz', label: 'Belice',               flag: 'BZ', iso: 84  },
+  { id: 'bj', label: 'Benín',                flag: 'BJ', iso: 204 },
+  { id: 'by', label: 'Bielorrusia',          flag: 'BY', iso: 112 },
+  { id: 'bo', label: 'Bolivia',              flag: 'BO', iso: 68  },
+  { id: 'ba', label: 'Bosnia y Herzegovina', flag: 'BA', iso: 70  },
+  { id: 'bw', label: 'Botsuana',             flag: 'BW', iso: 72  },
+  { id: 'br', label: 'Brasil',               flag: 'BR', iso: 76  },
+  { id: 'bn', label: 'Brunéi',               flag: 'BN', iso: 96  },
+  { id: 'bg', label: 'Bulgaria',             flag: 'BG', iso: 100 },
+  { id: 'bf', label: 'Burkina Faso',         flag: 'BF', iso: 854 },
+  { id: 'bi', label: 'Burundi',              flag: 'BI', iso: 108 },
+  { id: 'bt', label: 'Bután',                flag: 'BT', iso: 64  },
+  { id: 'cv', label: 'Cabo Verde',           flag: 'CV', iso: 132 },
+  { id: 'kh', label: 'Camboya',              flag: 'KH', iso: 116 },
+  { id: 'cm', label: 'Camerún',              flag: 'CM', iso: 120 },
+  { id: 'ca', label: 'Canadá',               flag: 'CA', iso: 124 },
+  { id: 'td', label: 'Chad',                 flag: 'TD', iso: 148 },
+  { id: 'cn', label: 'China',                flag: 'CN', iso: 156 },
+  { id: 'cy', label: 'Chipre',               flag: 'CY', iso: 196 },
+  { id: 'co', label: 'Colombia',             flag: 'CO', iso: 170 },
+  { id: 'km', label: 'Comoras',              flag: 'KM', iso: 174 },
+  { id: 'cg', label: 'Congo',                flag: 'CG', iso: 178 },
+  { id: 'cd', label: 'Congo RD',             flag: 'CD', iso: 180 },
+  { id: 'kp', label: 'Corea del Norte',      flag: 'KP', iso: 408 },
+  { id: 'kr', label: 'Corea del Sur',        flag: 'KR', iso: 410 },
+  { id: 'ci', label: 'Costa de Marfil',      flag: 'CI', iso: 384 },
+  { id: 'cr', label: 'Costa Rica',           flag: 'CR', iso: 188 },
+  { id: 'hr', label: 'Croacia',              flag: 'HR', iso: 191 },
+  { id: 'cu', label: 'Cuba',                 flag: 'CU', iso: 192 },
+  { id: 'dk', label: 'Dinamarca',            flag: 'DK', iso: 208 },
+  { id: 'dm', label: 'Dominica',             flag: 'DM', iso: 212 },
+  { id: 'ec', label: 'Ecuador',              flag: 'EC', iso: 218 },
+  { id: 'eg', label: 'Egipto',               flag: 'EG', iso: 818 },
+  { id: 'sv', label: 'El Salvador',          flag: 'SV', iso: 222 },
+  { id: 'ae', label: 'Emiratos Árabes',      flag: 'AE', iso: 784 },
+  { id: 'er', label: 'Eritrea',              flag: 'ER', iso: 232 },
+  { id: 'sk', label: 'Eslovaquia',           flag: 'SK', iso: 703 },
+  { id: 'si', label: 'Eslovenia',            flag: 'SI', iso: 705 },
+  { id: 'ee', label: 'Estonia',              flag: 'EE', iso: 233 },
+  { id: 'sz', label: 'Esuatini',             flag: 'SZ', iso: 748 },
+  { id: 'et', label: 'Etiopía',              flag: 'ET', iso: 231 },
+  { id: 'ph', label: 'Filipinas',            flag: 'PH', iso: 608 },
+  { id: 'fi', label: 'Finlandia',            flag: 'FI', iso: 246 },
+  { id: 'fj', label: 'Fiyi',                 flag: 'FJ', iso: 242 },
+  { id: 'ga', label: 'Gabón',                flag: 'GA', iso: 266 },
+  { id: 'gm', label: 'Gambia',               flag: 'GM', iso: 270 },
+  { id: 'ge', label: 'Georgia',              flag: 'GE', iso: 268 },
+  { id: 'gh', label: 'Ghana',                flag: 'GH', iso: 288 },
+  { id: 'gd', label: 'Granada',              flag: 'GD', iso: 308 },
+  { id: 'gr', label: 'Grecia',               flag: 'GR', iso: 300 },
+  { id: 'gl', label: 'Groenlandia',          flag: 'GL', iso: 304 },
+  { id: 'gt', label: 'Guatemala',            flag: 'GT', iso: 320 },
+  { id: 'gn', label: 'Guinea',               flag: 'GN', iso: 324 },
+  { id: 'gq', label: 'Guinea Ecuatorial',    flag: 'GQ', iso: 226 },
+  { id: 'gw', label: 'Guinea-Bisáu',         flag: 'GW', iso: 624 },
+  { id: 'gy', label: 'Guyana',               flag: 'GY', iso: 328 },
+  { id: 'ht', label: 'Haití',                flag: 'HT', iso: 332 },
+  { id: 'hn', label: 'Honduras',             flag: 'HN', iso: 340 },
+  { id: 'hu', label: 'Hungría',              flag: 'HU', iso: 348 },
+  { id: 'in', label: 'India',                flag: 'IN', iso: 356 },
+  { id: 'id', label: 'Indonesia',            flag: 'ID', iso: 360 },
+  { id: 'iq', label: 'Irak',                 flag: 'IQ', iso: 368 },
+  { id: 'ir', label: 'Irán',                 flag: 'IR', iso: 364 },
+  { id: 'ie', label: 'Irlanda',              flag: 'IE', iso: 372 },
+  { id: 'is', label: 'Islandia',             flag: 'IS', iso: 352 },
+  { id: 'sb', label: 'Islas Salomón',        flag: 'SB', iso: 90  },
+  { id: 'il', label: 'Israel',               flag: 'IL', iso: 376 },
+  { id: 'jm', label: 'Jamaica',              flag: 'JM', iso: 388 },
+  { id: 'jo', label: 'Jordania',             flag: 'JO', iso: 400 },
+  { id: 'kz', label: 'Kazajistán',           flag: 'KZ', iso: 398 },
+  { id: 'ke', label: 'Kenia',                flag: 'KE', iso: 404 },
+  { id: 'kg', label: 'Kirguistán',           flag: 'KG', iso: 417 },
+  { id: 'ki', label: 'Kiribati',             flag: 'KI', iso: 296 },
+  { id: 'kw', label: 'Kuwait',               flag: 'KW', iso: 414 },
+  { id: 'la', label: 'Laos',                 flag: 'LA', iso: 418 },
+  { id: 'ls', label: 'Lesoto',               flag: 'LS', iso: 426 },
+  { id: 'lv', label: 'Letonia',              flag: 'LV', iso: 428 },
+  { id: 'lb', label: 'Líbano',               flag: 'LB', iso: 422 },
+  { id: 'lr', label: 'Liberia',              flag: 'LR', iso: 430 },
+  { id: 'ly', label: 'Libia',                flag: 'LY', iso: 434 },
+  { id: 'li', label: 'Liechtenstein',        flag: 'LI', iso: 438 },
+  { id: 'lt', label: 'Lituania',             flag: 'LT', iso: 440 },
+  { id: 'lu', label: 'Luxemburgo',           flag: 'LU', iso: 442 },
+  { id: 'mk', label: 'Macedonia',            flag: 'MK', iso: 807 },
+  { id: 'mg', label: 'Madagascar',           flag: 'MG', iso: 450 },
+  { id: 'my', label: 'Malasia',              flag: 'MY', iso: 458 },
+  { id: 'mw', label: 'Malaui',               flag: 'MW', iso: 454 },
+  { id: 'mv', label: 'Maldivas',             flag: 'MV', iso: 462 },
+  { id: 'ml', label: 'Malí',                 flag: 'ML', iso: 466 },
+  { id: 'mt', label: 'Malta',                flag: 'MT', iso: 470 },
+  { id: 'ma', label: 'Marruecos',            flag: 'MA', iso: 504 },
+  { id: 'mh', label: 'Marshall',             flag: 'MH', iso: 584 },
+  { id: 'mu', label: 'Mauricio',             flag: 'MU', iso: 480 },
+  { id: 'mr', label: 'Mauritania',           flag: 'MR', iso: 478 },
+  { id: 'fm', label: 'Micronesia',           flag: 'FM', iso: 583 },
+  { id: 'md', label: 'Moldavia',             flag: 'MD', iso: 498 },
+  { id: 'mc', label: 'Mónaco',               flag: 'MC', iso: 492 },
+  { id: 'mn', label: 'Mongolia',             flag: 'MN', iso: 496 },
+  { id: 'me', label: 'Montenegro',           flag: 'ME', iso: 499 },
+  { id: 'mz', label: 'Mozambique',           flag: 'MZ', iso: 508 },
+  { id: 'mm', label: 'Myanmar',              flag: 'MM', iso: 104 },
+  { id: 'na', label: 'Namibia',              flag: 'NA', iso: 516 },
+  { id: 'nr', label: 'Nauru',                flag: 'NR', iso: 520 },
+  { id: 'np', label: 'Nepal',                flag: 'NP', iso: 524 },
+  { id: 'ni', label: 'Nicaragua',            flag: 'NI', iso: 558 },
+  { id: 'ne', label: 'Níger',                flag: 'NE', iso: 562 },
+  { id: 'ng', label: 'Nigeria',              flag: 'NG', iso: 566 },
+  { id: 'no', label: 'Noruega',              flag: 'NO', iso: 578 },
+  { id: 'nz', label: 'Nueva Zelanda',        flag: 'NZ', iso: 554 },
+  { id: 'om', label: 'Omán',                 flag: 'OM', iso: 512 },
+  { id: 'nl', label: 'Países Bajos',         flag: 'NL', iso: 528 },
+  { id: 'pk', label: 'Pakistán',             flag: 'PK', iso: 586 },
+  { id: 'pw', label: 'Palaos',               flag: 'PW', iso: 585 },
+  { id: 'ps', label: 'Palestina',            flag: 'PS', iso: 275 },
+  { id: 'pa', label: 'Panamá',               flag: 'PA', iso: 591 },
+  { id: 'pg', label: 'Papúa Nueva Guinea',   flag: 'PG', iso: 598 },
+  { id: 'py', label: 'Paraguay',             flag: 'PY', iso: 600 },
+  { id: 'pe', label: 'Perú',                 flag: 'PE', iso: 604 },
+  { id: 'pl', label: 'Polonia',              flag: 'PL', iso: 616 },
+  { id: 'pt', label: 'Portugal',             flag: 'PT', iso: 620 },
+  { id: 'qa', label: 'Qatar',                flag: 'QA', iso: 634 },
+  { id: 'gb', label: 'Reino Unido',          flag: 'GB', iso: 826 },
+  { id: 'cz', label: 'Rep. Checa',           flag: 'CZ', iso: 203 },
+  { id: 'do', label: 'Rep. Dominicana',      flag: 'DO', iso: 214 },
+  { id: 'rw', label: 'Ruanda',               flag: 'RW', iso: 646 },
+  { id: 'ro', label: 'Rumania',              flag: 'RO', iso: 642 },
+  { id: 'ru', label: 'Rusia',                flag: 'RU', iso: 643 },
+  { id: 'ws', label: 'Samoa',                flag: 'WS', iso: 882 },
+  { id: 'kn', label: 'San Cristóbal',        flag: 'KN', iso: 659 },
+  { id: 'sm', label: 'San Marino',           flag: 'SM', iso: 674 },
+  { id: 'vc', label: 'San Vicente',          flag: 'VC', iso: 670 },
+  { id: 'lc', label: 'Santa Lucía',          flag: 'LC', iso: 662 },
+  { id: 'st', label: 'Santo Tomé y Príncipe',flag: 'ST', iso: 678 },
+  { id: 'sn', label: 'Senegal',              flag: 'SN', iso: 686 },
+  { id: 'rs', label: 'Serbia',               flag: 'RS', iso: 688 },
+  { id: 'sc', label: 'Seychelles',           flag: 'SC', iso: 690 },
+  { id: 'sl', label: 'Sierra Leona',         flag: 'SL', iso: 694 },
+  { id: 'sg', label: 'Singapur',             flag: 'SG', iso: 702 },
+  { id: 'sy', label: 'Siria',                flag: 'SY', iso: 760 },
+  { id: 'so', label: 'Somalia',              flag: 'SO', iso: 706 },
+  { id: 'lk', label: 'Sri Lanka',            flag: 'LK', iso: 144 },
+  { id: 'za', label: 'Sudáfrica',            flag: 'ZA', iso: 710 },
+  { id: 'sd', label: 'Sudán',                flag: 'SD', iso: 736 },
+  { id: 'ss', label: 'Sudán del Sur',        flag: 'SS', iso: 728 },
+  { id: 'se', label: 'Suecia',               flag: 'SE', iso: 752 },
+  { id: 'ch', label: 'Suiza',                flag: 'CH', iso: 756 },
+  { id: 'sr', label: 'Surinam',              flag: 'SR', iso: 740 },
+  { id: 'th', label: 'Tailandia',            flag: 'TH', iso: 764 },
+  { id: 'tw', label: 'Taiwán',               flag: 'TW', iso: 158 },
+  { id: 'tz', label: 'Tanzania',             flag: 'TZ', iso: 834 },
+  { id: 'tj', label: 'Tayikistán',           flag: 'TJ', iso: 762 },
+  { id: 'tl', label: 'Timor-Leste',          flag: 'TL', iso: 626 },
+  { id: 'tg', label: 'Togo',                 flag: 'TG', iso: 768 },
+  { id: 'to', label: 'Tonga',                flag: 'TO', iso: 776 },
+  { id: 'tt', label: 'Trinidad y Tobago',    flag: 'TT', iso: 780 },
+  { id: 'tn', label: 'Túnez',                flag: 'TN', iso: 788 },
+  { id: 'tm', label: 'Turkmenistán',         flag: 'TM', iso: 795 },
+  { id: 'tr', label: 'Turquía',              flag: 'TR', iso: 792 },
+  { id: 'tv', label: 'Tuvalu',               flag: 'TV', iso: 798 },
+  { id: 'ua', label: 'Ucrania',              flag: 'UA', iso: 804 },
+  { id: 'ug', label: 'Uganda',               flag: 'UG', iso: 800 },
+  { id: 'uy', label: 'Uruguay',              flag: 'UY', iso: 858 },
+  { id: 'uz', label: 'Uzbekistán',           flag: 'UZ', iso: 860 },
+  { id: 'vu', label: 'Vanuatu',              flag: 'VU', iso: 548 },
+  { id: 'va', label: 'Vaticano',             flag: 'VA', iso: 336 },
+  { id: 've', label: 'Venezuela',            flag: 'VE', iso: 862 },
+  { id: 'vn', label: 'Vietnam',              flag: 'VN', iso: 704 },
+  { id: 'ye', label: 'Yemen',                flag: 'YE', iso: 887 },
+  { id: 'dj', label: 'Yibuti',               flag: 'DJ', iso: 262 },
+  { id: 'zm', label: 'Zambia',               flag: 'ZM', iso: 894 },
+  { id: 'zw', label: 'Zimbabue',             flag: 'ZW', iso: 716 },
 ]
 
 const DENOMINATIONS = [
@@ -54,26 +228,203 @@ const MILESTONES = [
 const CONFETTI_COLORS = ['#10b981','#6366f1','#f59e0b','#ec4899','#3b82f6','#a78bfa','#34d399','#f472b6']
 
 const COUNTRY_RATES = {
-  cl:  { symbol: '$',   rate: 950,   label: 'CLP' },
-  es:  { symbol: '€',   rate: 0.92,  label: 'EUR' },
-  mx:  { symbol: '$',   rate: 17.1,  label: 'MXN' },
-  ar:  { symbol: '$',   rate: 870,   label: 'ARS' },
-  fr:  { symbol: '€',   rate: 0.92,  label: 'EUR' },
-  jp:  { symbol: '¥',   rate: 149,   label: 'JPY' },
-  us:  { symbol: '$',   rate: 1,     label: 'USD' },
-  it:  { symbol: '€',   rate: 0.92,  label: 'EUR' },
-  de:  { symbol: '€',   rate: 0.92,  label: 'EUR' },
-  pt:  { symbol: '€',   rate: 0.92,  label: 'EUR' },
-  br:  { symbol: 'R$',  rate: 4.97,  label: 'BRL' },
-  ca:  { symbol: 'C$',  rate: 1.36,  label: 'CAD' },
-  au:  { symbol: 'A$',  rate: 1.53,  label: 'AUD' },
-  nl:  { symbol: '€',   rate: 0.92,  label: 'EUR' },
-  kr:  { symbol: '₩',   rate: 1325,  label: 'KRW' },
-  gb:  { symbol: '£',   rate: 0.79,  label: 'GBP' },
-  cn:  { symbol: '¥',   rate: 7.24,  label: 'CNY' },
-  th:  { symbol: '฿',   rate: 35.1,  label: 'THB' },
-  nz:  { symbol: 'NZ$', rate: 1.63,  label: 'NZD' },
-  co:  { symbol: '$',   rate: 3900,  label: 'COP' },
+  af:  { symbol: '؋',    rate: 71.5,   label: 'AFN' },  // Afganistán
+  al:  { symbol: 'L',    rate: 93.2,   label: 'ALL' },  // Albania
+  de:  { symbol: '€',    rate: 0.92,   label: 'EUR' },  // Alemania
+  ad:  { symbol: '€',    rate: 0.92,   label: 'EUR' },  // Andorra
+  ao:  { symbol: 'Kz',   rate: 830,    label: 'AOA' },  // Angola
+  ag:  { symbol: '$',    rate: 2.7,    label: 'XCD' },  // Antigua y Barbuda
+  sa:  { symbol: '﷼',    rate: 3.75,   label: 'SAR' },  // Arabia Saudí
+  dz:  { symbol: 'دج',   rate: 134,    label: 'DZD' },  // Argelia
+  ar:  { symbol: '$',    rate: 870,    label: 'ARS' },  // Argentina
+  am:  { symbol: '֏',    rate: 388,    label: 'AMD' },  // Armenia
+  au:  { symbol: 'A$',   rate: 1.53,   label: 'AUD' },  // Australia
+  at:  { symbol: '€',    rate: 0.92,   label: 'EUR' },  // Austria
+  az:  { symbol: '₼',    rate: 1.70,   label: 'AZN' },  // Azerbaiyán
+  bs:  { symbol: 'B$',   rate: 1.0,    label: 'BSD' },  // Bahamas
+  bd:  { symbol: '৳',    rate: 110,    label: 'BDT' },  // Bangladesh
+  bb:  { symbol: 'Bds$', rate: 2.0,    label: 'BBD' },  // Barbados
+  bh:  { symbol: 'BD',   rate: 0.38,   label: 'BHD' },  // Baréin
+  be:  { symbol: '€',    rate: 0.92,   label: 'EUR' },  // Bélgica
+  bz:  { symbol: 'BZ$',  rate: 2.0,    label: 'BZD' },  // Belice
+  bj:  { symbol: 'Fr',   rate: 603,    label: 'XOF' },  // Benín
+  by:  { symbol: 'Br',   rate: 3.27,   label: 'BYN' },  // Bielorrusia
+  bo:  { symbol: 'Bs',   rate: 6.91,   label: 'BOB' },  // Bolivia
+  ba:  { symbol: 'KM',   rate: 1.80,   label: 'BAM' },  // Bosnia y Herzegovina
+  bw:  { symbol: 'P',    rate: 13.5,   label: 'BWP' },  // Botsuana
+  br:  { symbol: 'R$',   rate: 4.97,   label: 'BRL' },  // Brasil
+  bn:  { symbol: 'B$',   rate: 1.35,   label: 'BND' },  // Brunéi
+  bg:  { symbol: 'лв',   rate: 1.80,   label: 'BGN' },  // Bulgaria
+  bf:  { symbol: 'Fr',   rate: 603,    label: 'XOF' },  // Burkina Faso
+  bi:  { symbol: 'Fr',   rate: 2850,   label: 'BIF' },  // Burundi
+  bt:  { symbol: 'Nu.',  rate: 83.1,   label: 'BTN' },  // Bután
+  cv:  { symbol: '$',    rate: 98.3,   label: 'CVE' },  // Cabo Verde
+  kh:  { symbol: '៛',    rate: 4100,   label: 'KHR' },  // Camboya
+  cm:  { symbol: 'Fr',   rate: 603,    label: 'XAF' },  // Camerún
+  ca:  { symbol: 'C$',   rate: 1.36,   label: 'CAD' },  // Canadá
+  cf:  { symbol: 'Fr',   rate: 603,    label: 'XAF' },  // Centroáfrica
+  td:  { symbol: 'Fr',   rate: 603,    label: 'XAF' },  // Chad
+  cl:  { symbol: '$',    rate: 950,    label: 'CLP' },  // Chile
+  cn:  { symbol: '¥',    rate: 7.24,   label: 'CNY' },  // China
+  cy:  { symbol: '€',    rate: 0.92,   label: 'EUR' },  // Chipre
+  co:  { symbol: '$',    rate: 3900,   label: 'COP' },  // Colombia
+  km:  { symbol: 'Fr',   rate: 452,    label: 'KMF' },  // Comoras
+  cg:  { symbol: 'Fr',   rate: 603,    label: 'XAF' },  // Congo
+  cd:  { symbol: 'Fr',   rate: 2750,   label: 'CDF' },  // Congo RD
+  kp:  { symbol: '₩',    rate: 900,    label: 'KPW' },  // Corea del Norte
+  kr:  { symbol: '₩',    rate: 1325,   label: 'KRW' },  // Corea del Sur
+  ci:  { symbol: 'Fr',   rate: 603,    label: 'XOF' },  // Costa de Marfil
+  cr:  { symbol: '₡',    rate: 515,    label: 'CRC' },  // Costa Rica
+  hr:  { symbol: '€',    rate: 0.92,   label: 'EUR' },  // Croacia
+  cu:  { symbol: '$',    rate: 24,     label: 'CUP' },  // Cuba
+  dk:  { symbol: 'kr',   rate: 6.88,   label: 'DKK' },  // Dinamarca
+  dm:  { symbol: '$',    rate: 2.7,    label: 'XCD' },  // Dominica
+  ec:  { symbol: '$',    rate: 1,      label: 'USD' },  // Ecuador
+  us:  { symbol: '$',    rate: 1,      label: 'USD' },  // EE.UU.
+  eg:  { symbol: '£',    rate: 30.9,   label: 'EGP' },  // Egipto
+  sv:  { symbol: '$',    rate: 1,      label: 'USD' },  // El Salvador
+  ae:  { symbol: 'د.إ',  rate: 3.67,   label: 'AED' },  // Emiratos Árabes
+  er:  { symbol: 'Nfk',  rate: 15,     label: 'ERN' },  // Eritrea
+  sk:  { symbol: '€',    rate: 0.92,   label: 'EUR' },  // Eslovaquia
+  si:  { symbol: '€',    rate: 0.92,   label: 'EUR' },  // Eslovenia
+  es:  { symbol: '€',    rate: 0.92,   label: 'EUR' },  // España
+  ee:  { symbol: '€',    rate: 0.92,   label: 'EUR' },  // Estonia
+  sz:  { symbol: 'L',    rate: 18.6,   label: 'SZL' },  // Esuatini
+  et:  { symbol: 'Br',   rate: 56.5,   label: 'ETB' },  // Etiopía
+  ph:  { symbol: '₱',    rate: 56.5,   label: 'PHP' },  // Filipinas
+  fi:  { symbol: '€',    rate: 0.92,   label: 'EUR' },  // Finlandia
+  fj:  { symbol: 'FJ$',  rate: 2.24,   label: 'FJD' },  // Fiyi
+  fr:  { symbol: '€',    rate: 0.92,   label: 'EUR' },  // Francia
+  ga:  { symbol: 'Fr',   rate: 603,    label: 'XAF' },  // Gabón
+  gm:  { symbol: 'D',    rate: 67.5,   label: 'GMD' },  // Gambia
+  ge:  { symbol: '₾',    rate: 2.65,   label: 'GEL' },  // Georgia
+  gh:  { symbol: '₵',    rate: 12.4,   label: 'GHS' },  // Ghana
+  gd:  { symbol: '$',    rate: 2.7,    label: 'XCD' },  // Granada
+  gr:  { symbol: '€',    rate: 0.92,   label: 'EUR' },  // Grecia
+  gl:  { symbol: 'kr',   rate: 6.9,    label: 'DKK' },  // Groenlandia
+  gt:  { symbol: 'Q',    rate: 7.79,   label: 'GTQ' },  // Guatemala
+  gn:  { symbol: 'Fr',   rate: 8600,   label: 'GNF' },  // Guinea
+  gq:  { symbol: 'Fr',   rate: 603,    label: 'XAF' },  // Guinea Ecuatorial
+  gw:  { symbol: 'Fr',   rate: 603,    label: 'XOF' },  // Guinea-Bisáu
+  gy:  { symbol: 'G$',   rate: 209,    label: 'GYD' },  // Guyana
+  ht:  { symbol: 'G',    rate: 132,    label: 'HTG' },  // Haití
+  hn:  { symbol: 'L',    rate: 24.7,   label: 'HNL' },  // Honduras
+  hu:  { symbol: 'Ft',   rate: 362,    label: 'HUF' },  // Hungría
+  in:  { symbol: '₹',    rate: 83.1,   label: 'INR' },  // India
+  id:  { symbol: 'Rp',   rate: 15600,  label: 'IDR' },  // Indonesia
+  iq:  { symbol: 'ع.د',  rate: 1310,   label: 'IQD' },  // Irak
+  ir:  { symbol: '﷼',    rate: 42000,  label: 'IRR' },  // Irán
+  ie:  { symbol: '€',    rate: 0.92,   label: 'EUR' },  // Irlanda
+  is:  { symbol: 'kr',   rate: 137,    label: 'ISK' },  // Islandia
+  sb:  { symbol: 'SI$',  rate: 8.45,   label: 'SBD' },  // Islas Salomón
+  il:  { symbol: '₪',    rate: 3.74,   label: 'ILS' },  // Israel
+  it:  { symbol: '€',    rate: 0.92,   label: 'EUR' },  // Italia
+  jm:  { symbol: 'J$',   rate: 155,    label: 'JMD' },  // Jamaica
+  jp:  { symbol: '¥',    rate: 149,    label: 'JPY' },  // Japón
+  jo:  { symbol: 'د.أ',  rate: 0.71,   label: 'JOD' },  // Jordania
+  kz:  { symbol: '₸',    rate: 452,    label: 'KZT' },  // Kazajistán
+  ke:  { symbol: 'KSh',  rate: 129,    label: 'KES' },  // Kenia
+  kg:  { symbol: 'с',    rate: 89.2,   label: 'KGS' },  // Kirguistán
+  ki:  { symbol: '$',    rate: 1,      label: 'AUD' },  // Kiribati
+  kw:  { symbol: 'د.ك',  rate: 0.31,   label: 'KWD' },  // Kuwait
+  la:  { symbol: '₭',    rate: 21500,  label: 'LAK' },  // Laos
+  ls:  { symbol: 'L',    rate: 18.6,   label: 'LSL' },  // Lesoto
+  lv:  { symbol: '€',    rate: 0.92,   label: 'EUR' },  // Letonia
+  lb:  { symbol: 'ل.ل',  rate: 89500,  label: 'LBP' },  // Líbano
+  lr:  { symbol: 'L$',   rate: 190,    label: 'LRD' },  // Liberia
+  ly:  { symbol: 'ل.د',  rate: 4.83,   label: 'LYD' },  // Libia
+  li:  { symbol: 'Fr',   rate: 0.89,   label: 'CHF' },  // Liechtenstein
+  lt:  { symbol: '€',    rate: 0.92,   label: 'EUR' },  // Lituania
+  lu:  { symbol: '€',    rate: 0.92,   label: 'EUR' },  // Luxemburgo
+  mk:  { symbol: 'ден',  rate: 56.8,   label: 'MKD' },  // Macedonia
+  mg:  { symbol: 'Ar',   rate: 4500,   label: 'MGA' },  // Madagascar
+  my:  { symbol: 'RM',   rate: 4.72,   label: 'MYR' },  // Malasia
+  mw:  { symbol: 'MK',   rate: 1730,   label: 'MWK' },  // Malaui
+  mv:  { symbol: 'Rf',   rate: 15.4,   label: 'MVR' },  // Maldivas
+  ml:  { symbol: 'Fr',   rate: 603,    label: 'XOF' },  // Malí
+  mt:  { symbol: '€',    rate: 0.92,   label: 'EUR' },  // Malta
+  ma:  { symbol: 'د.م',  rate: 9.97,   label: 'MAD' },  // Marruecos
+  mh:  { symbol: '$',    rate: 1,      label: 'USD' },  // Marshall
+  mu:  { symbol: '₨',    rate: 46.5,   label: 'MUR' },  // Mauricio
+  mr:  { symbol: 'UM',   rate: 39.5,   label: 'MRU' },  // Mauritania
+  mx:  { symbol: '$',    rate: 17.1,   label: 'MXN' },  // México
+  fm:  { symbol: '$',    rate: 1,      label: 'USD' },  // Micronesia
+  md:  { symbol: 'L',    rate: 17.8,   label: 'MDL' },  // Moldavia
+  mc:  { symbol: '€',    rate: 0.92,   label: 'EUR' },  // Mónaco
+  mn:  { symbol: '₮',    rate: 3450,   label: 'MNT' },  // Mongolia
+  me:  { symbol: '€',    rate: 0.92,   label: 'EUR' },  // Montenegro
+  mz:  { symbol: 'MT',   rate: 63.5,   label: 'MZN' },  // Mozambique
+  mm:  { symbol: 'K',    rate: 2100,   label: 'MMK' },  // Myanmar
+  na:  { symbol: 'N$',   rate: 18.6,   label: 'NAD' },  // Namibia
+  nr:  { symbol: '$',    rate: 1,      label: 'AUD' },  // Nauru
+  np:  { symbol: 'Rs',   rate: 133,    label: 'NPR' },  // Nepal
+  ni:  { symbol: 'C$',   rate: 36.6,   label: 'NIO' },  // Nicaragua
+  ne:  { symbol: 'Fr',   rate: 603,    label: 'XOF' },  // Níger
+  ng:  { symbol: '₦',    rate: 1540,   label: 'NGN' },  // Nigeria
+  no:  { symbol: 'kr',   rate: 10.6,   label: 'NOK' },  // Noruega
+  nz:  { symbol: 'NZ$',  rate: 1.63,   label: 'NZD' },  // Nueva Zelanda
+  om:  { symbol: 'ر.ع',  rate: 0.38,   label: 'OMR' },  // Omán
+  nl:  { symbol: '€',    rate: 0.92,   label: 'EUR' },  // Países Bajos
+  pk:  { symbol: '₨',    rate: 278,    label: 'PKR' },  // Pakistán
+  pw:  { symbol: '$',    rate: 1,      label: 'USD' },  // Palaos
+  ps:  { symbol: '₪',    rate: 3.74,   label: 'ILS' },  // Palestina
+  pa:  { symbol: 'B/.',  rate: 1.0,    label: 'PAB' },  // Panamá
+  pg:  { symbol: 'K',    rate: 3.73,   label: 'PGK' },  // Papúa Nueva Guinea
+  py:  { symbol: '₲',    rate: 7290,   label: 'PYG' },  // Paraguay
+  pe:  { symbol: 'S/',   rate: 3.72,   label: 'PEN' },  // Perú
+  pl:  { symbol: 'zł',   rate: 3.95,   label: 'PLN' },  // Polonia
+  pt:  { symbol: '€',    rate: 0.92,   label: 'EUR' },  // Portugal
+  qa:  { symbol: 'ر.ق',  rate: 3.64,   label: 'QAR' },  // Qatar
+  gb:  { symbol: '£',    rate: 0.79,   label: 'GBP' },  // Reino Unido
+  cz:  { symbol: 'Kč',   rate: 22.8,   label: 'CZK' },  // Rep. Checa
+  do:  { symbol: 'RD$',  rate: 58.5,   label: 'DOP' },  // Rep. Dominicana
+  rw:  { symbol: 'Fr',   rate: 1290,   label: 'RWF' },  // Ruanda
+  ro:  { symbol: 'lei',  rate: 4.57,   label: 'RON' },  // Rumania
+  ru:  { symbol: '₽',    rate: 89.5,   label: 'RUB' },  // Rusia
+  ws:  { symbol: 'T',    rate: 2.72,   label: 'WST' },  // Samoa
+  kn:  { symbol: '$',    rate: 2.7,    label: 'XCD' },  // San Cristóbal
+  sm:  { symbol: '€',    rate: 0.92,   label: 'EUR' },  // San Marino
+  vc:  { symbol: '$',    rate: 2.7,    label: 'XCD' },  // San Vicente
+  lc:  { symbol: '$',    rate: 2.7,    label: 'XCD' },  // Santa Lucía
+  st:  { symbol: 'Db',   rate: 23.1,   label: 'STN' },  // Santo Tomé y Príncipe
+  sn:  { symbol: 'Fr',   rate: 603,    label: 'XOF' },  // Senegal
+  rs:  { symbol: 'din',  rate: 107,    label: 'RSD' },  // Serbia
+  sc:  { symbol: '₨',    rate: 13.7,   label: 'SCR' },  // Seychelles
+  sl:  { symbol: 'Le',   rate: 22000,  label: 'SLL' },  // Sierra Leona
+  sg:  { symbol: 'S$',   rate: 1.34,   label: 'SGD' },  // Singapur
+  sy:  { symbol: '£',    rate: 13000,  label: 'SYP' },  // Siria
+  so:  { symbol: 'Sh',   rate: 571,    label: 'SOS' },  // Somalia
+  lk:  { symbol: 'Rs',   rate: 312,    label: 'LKR' },  // Sri Lanka
+  za:  { symbol: 'R',    rate: 18.6,   label: 'ZAR' },  // Sudáfrica
+  sd:  { symbol: '£',    rate: 600,    label: 'SDG' },  // Sudán
+  ss:  { symbol: '£',    rate: 1300,   label: 'SSP' },  // Sudán del Sur
+  se:  { symbol: 'kr',   rate: 10.4,   label: 'SEK' },  // Suecia
+  ch:  { symbol: 'Fr',   rate: 0.89,   label: 'CHF' },  // Suiza
+  sr:  { symbol: '$',    rate: 36.5,   label: 'SRD' },  // Surinam
+  th:  { symbol: '฿',    rate: 35.1,   label: 'THB' },  // Tailandia
+  tw:  { symbol: 'NT$',  rate: 31.8,   label: 'TWD' },  // Taiwán
+  tz:  { symbol: 'Sh',   rate: 2550,   label: 'TZS' },  // Tanzania
+  tj:  { symbol: 'SM',   rate: 10.9,   label: 'TJS' },  // Tayikistán
+  tl:  { symbol: '$',    rate: 1,      label: 'USD' },  // Timor-Leste
+  tg:  { symbol: 'Fr',   rate: 603,    label: 'XOF' },  // Togo
+  to:  { symbol: 'T$',   rate: 2.36,   label: 'TOP' },  // Tonga
+  tt:  { symbol: 'TT$',  rate: 6.79,   label: 'TTD' },  // Trinidad y Tobago
+  tn:  { symbol: 'د.ت',  rate: 3.11,   label: 'TND' },  // Túnez
+  tm:  { symbol: 'T',    rate: 3.50,   label: 'TMT' },  // Turkmenistán
+  tr:  { symbol: '₺',    rate: 32.1,   label: 'TRY' },  // Turquía
+  tv:  { symbol: '$',    rate: 1,      label: 'AUD' },  // Tuvalu
+  ua:  { symbol: '₴',    rate: 37.3,   label: 'UAH' },  // Ucrania
+  ug:  { symbol: 'Sh',   rate: 3750,   label: 'UGX' },  // Uganda
+  uy:  { symbol: '$',    rate: 39.5,   label: 'UYU' },  // Uruguay
+  uz:  { symbol: "so'm", rate: 12500,  label: 'UZS' },  // Uzbekistán
+  vu:  { symbol: 'Vt',   rate: 118,    label: 'VUV' },  // Vanuatu
+  va:  { symbol: '€',    rate: 0.92,   label: 'EUR' },  // Vaticano
+  ve:  { symbol: 'Bs',   rate: 36.5,   label: 'VES' },  // Venezuela
+  vn:  { symbol: '₫',    rate: 24500,  label: 'VND' },  // Vietnam
+  ye:  { symbol: '﷼',    rate: 250,    label: 'YER' },  // Yemen
+  dj:  { symbol: 'Fr',   rate: 177,    label: 'DJF' },  // Yibuti
+  zm:  { symbol: 'ZK',   rate: 26.5,   label: 'ZMW' },  // Zambia
+  zw:  { symbol: 'Z$',   rate: 360,    label: 'ZWL' },  // Zimbabue
 }
 
 /* ─── Persistence ───────────────────────────────────────────── */
@@ -107,14 +458,14 @@ const renderFlag = (code, className = "w-6 h-4 inline-block rounded-sm object-co
 )
 
 /* ─── WorldMap ──────────────────────────────────────────────────
-   Defined at module level — NEVER inside another component.
-   Uses dynamic ESM imports so no extra bundler config needed.
 ──────────────────────────────────────────────────────────────── */
-function WorldMap({ selectedIso }) {
+function WorldMap({ selectedIso, selectableIsos = [], onSelectCountry }) {
   const containerRef = useRef(null)
   const d3Ref        = useRef(null)   // stores d3 module after first load
   const svgRef       = useRef(null)   // stores d3 selection
   const [ready, setReady] = useState(false)
+  const selectedIsoRef = useRef(selectedIso)
+  useEffect(() => { selectedIsoRef.current = selectedIso }, [selectedIso])
 
   // Load D3 + TopoJSON + world data once on mount
   useEffect(() => {
@@ -142,8 +493,8 @@ function WorldMap({ selectedIso }) {
           svgRef.current = svg
 
           const projection = d3.geoNaturalEarth1()
-            .scale(W / 5.8)
-            .translate([W / 2, H / 2])
+  .scale(W / 4.2)
+  .translate([W / 2, H / 2])
 
           const pathFn = d3.geoPath().projection(projection)
           const features = topojson.feature(world, world.objects.countries).features
@@ -158,11 +509,45 @@ function WorldMap({ selectedIso }) {
             .attr('stroke', '#0f172a')
             .attr('stroke-width', 0.4)
             .style('transition', 'fill 0.4s ease')
-
+            .on('mouseover', function(event, d) {
+              const isSelectable = selectableIsos.includes(Number(d.id))
+              d3.select(this).attr('fill', isSelectable ? '#34d399' : '#2a5080')
+              if (isSelectable) d3.select(this).style('cursor', 'pointer')
+              // tooltip
+              const allDests = [...(window.__allDests || [])]
+              const found = allDests.find(x => x.iso === Number(d.id))
+              if (found) {
+                let tip = document.getElementById('map-tooltip')
+                if (!tip) { tip = document.createElement('div'); tip.id = 'map-tooltip'; document.body.appendChild(tip) }
+                tip.style.cssText = `position:fixed;left:${event.clientX+12}px;top:${event.clientY-28}px;background:#0f172a;color:#e2e8f0;padding:4px 10px;border-radius:8px;font-size:12px;font-weight:700;border:1px solid #334155;pointer-events:none;z-index:9999`
+                tip.textContent = found.label
+              }
+            })
+            .on('mousemove', function(event) {
+              const tip = document.getElementById('map-tooltip')
+              if (tip) { tip.style.left = `${event.clientX+12}px`; tip.style.top = `${event.clientY-28}px` }
+            })
+            .on('mouseout', function(event, d) {
+              d3.select(this)
+                .attr('fill', d.id == selectedIsoRef.current ? '#10b981' : '#1e3a5f')
+                .style('cursor', 'default')
+              const tip = document.getElementById('map-tooltip')
+              if (tip) tip.remove()
+            })
+            .on('click', function(event, d) {
+              const isSelectable = selectableIsos.includes(Number(d.id))
+              if (isSelectable && onSelectCountry) onSelectCountry(Number(d.id))
+            })
+          
+            window.__allDests = [...DESTINATIONS, ...EXTRA_DESTINATIONS]
           if (!cancelled) setReady(true)
         })
     }).catch(() => {}) // silently ignore network errors
-    return () => { cancelled = true }
+    return () => {
+      cancelled = true
+      const tip = document.getElementById('map-tooltip')
+      if (tip) tip.remove()
+    }
   }, [])
 
   // Re-color whenever selectedIso changes (or map first becomes ready)
@@ -171,8 +556,8 @@ function WorldMap({ selectedIso }) {
     svgRef.current.selectAll('path')
       // eslint-disable-next-line eqeqeq — intentional: TopoJSON ids are numbers, selectedIso may be number
       .attr('fill', d => d.id == selectedIso ? '#10b981' : '#1e3a5f')
-      .attr('stroke', d => d.id == selectedIso ? '#34d399' : '#0f172a')
-      .attr('stroke-width', d => d.id == selectedIso ? 1 : 0.4)
+.attr('stroke', d => d.id == selectedIso ? '#34d399' : '#0f172a')
+.attr('stroke-width', d => d.id == selectedIso ? 1 : 0.4)
   }, [selectedIso, ready])
 
   return (
@@ -268,6 +653,12 @@ function MilestoneToast({ milestone, onClose }) {
 
 /* ─── Extra Destinations Modal ──────────────────────────────── */
 function ExtraDestinationsModal({ selected, onSelect, onClose }) {
+  const [search, setSearch] = useState('')  // ← añade esto
+
+  const filtered = EXTRA_DESTINATIONS.filter(d =>
+    d.label.toLowerCase().includes(search.toLowerCase())
+  )
+
   return (
     <div className="modal-overlay" onClick={(e) => e.target === e.currentTarget && onClose()}>
       <div className="animate-modal-in card-glass rounded-3xl p-6 w-full max-w-sm border border-indigo-500/20 shadow-2xl">
@@ -280,8 +671,36 @@ function ExtraDestinationsModal({ selected, onSelect, onClose }) {
             <X size={18} />
           </button>
         </div>
+
+        {/* ── Buscador ── */}
+        <div className="relative mb-4">
+          <svg className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 pointer-events-none"
+            width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+            <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+          </svg>
+          <input
+            autoFocus
+            type="text"
+            value={search}
+            onChange={e => setSearch(e.target.value)}
+            placeholder="Buscar país..."
+            className="w-full bg-slate-800/60 border border-slate-600/50 rounded-xl pl-9 pr-10 py-2.5
+              text-white text-sm font-display font-semibold placeholder:text-slate-600
+              focus:outline-none focus:border-indigo-400/70 focus:ring-1 focus:ring-indigo-400/30 transition-all"
+          />
+          {search && (
+            <button
+              onClick={() => setSearch('')}
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-300 transition-colors"
+            >
+              <X size={13} />
+            </button>
+          )}
+        </div>
+
+        {/* ── Grid filtrado ── */}
         <div className="grid grid-cols-3 gap-2 max-h-72 overflow-y-auto pr-1 py-1">
-          {EXTRA_DESTINATIONS.map(d => (
+          {filtered.length > 0 ? filtered.map(d => (
             <button
               key={d.id}
               onClick={() => { onSelect(d); onClose() }}
@@ -297,7 +716,11 @@ function ExtraDestinationsModal({ selected, onSelect, onClose }) {
                 {d.label}
               </span>
             </button>
-          ))}
+          )) : (
+            <div className="col-span-3 text-center py-8 text-slate-500 text-sm">
+              No se encontró «{search}»
+            </div>
+          )}
         </div>
       </div>
     </div>
@@ -310,6 +733,14 @@ function EditGoalModal({ destination, goal, onSave, onClose }) {
   const [amount, setAmount] = useState(String(goal))
   const [error, setError] = useState('')
   const [showExtra, setShowExtra] = useState(false)
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Enter') handleSave()
+    }
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [amount, dest])
 
   const RATES = {
     USD: { symbol: '$',  rate: 1,      label: 'USD' },
@@ -491,23 +922,6 @@ function SetupScreen({ onStart }) {
             <p className="text-slate-400 text-sm mt-2">Tu rastreador de ahorros gamificado</p>
           </div>
 
-          {/* Step indicators */}
-          <div className="flex items-center gap-3 mb-6 w-full">
-            {[1, 2].map((s, i, arr) => (
-              <Fragment key={s}>
-                <div className={`w-7 h-7 flex-shrink-0 rounded-full flex items-center justify-center font-display font-bold text-sm transition-all duration-300
-                  ${step >= s ? 'bg-emerald-500 text-white' : 'bg-slate-800 text-slate-500 border border-slate-700'}`}>
-                  {step > s ? <Check size={14} /> : s}
-                </div>
-                {i < arr.length - 1 && (
-                  <div className="flex-1 h-0.5 rounded overflow-hidden bg-slate-700">
-                    <div className={`h-full rounded transition-all duration-500 ${step > s ? 'w-full bg-emerald-500' : 'w-0'}`} />
-                  </div>
-                )}
-              </Fragment>
-            ))}
-          </div>
-
           {/* Card */}
           <div className="card-glass rounded-3xl p-6 border border-indigo-500/20 shadow-2xl animate-modal-in">
             {step === 1 && (
@@ -637,10 +1051,6 @@ function SetupScreen({ onStart }) {
               </>
             )}
           </div>
-
-          <p className="text-center lg:text-left text-slate-600 text-xs mt-5">
-            Tu progreso se guarda automáticamente en este dispositivo
-          </p>
         </div>
 
         {/* RIGHT — map panel, hidden on mobile */}
@@ -656,7 +1066,14 @@ function SetupScreen({ onStart }) {
           />
           {/* Map */}
           <div className="relative z-10 w-full h-full p-6 flex items-center">
-            <WorldMap selectedIso={dest?.iso} />
+            <WorldMap 
+              selectedIso={dest?.iso} 
+              selectableIsos={[...DESTINATIONS, ...EXTRA_DESTINATIONS].map(d => d.iso)}
+              onSelectCountry={(iso) => {
+                const found = [...DESTINATIONS, ...EXTRA_DESTINATIONS].find(d => d.iso === iso)
+                if (found) { setDest(found); setError('') }
+              }}
+            />
           </div>
           {/* Selected country label */}
           {dest && (
@@ -967,14 +1384,13 @@ export default function App() {
                 </div>
                 <span className="font-display font-black text-white uppercase tracking-wide"
                   style={{ fontSize: '1.8rem', lineHeight: 1.1, letterSpacing: '0.06em', fontSynthesis: 'none' }}>
-                  Intercambio <span className="text-indigo-300 text-xs">✈️</span>
+                  Intercambio <span className="text-indigo-300 text-xs"></span>
                 </span>
                 <div className="flex items-center gap-2 mt-0.5">
                   <span className="font-display font-black text-gradient-emerald uppercase"
                     style={{ fontSize: '2.8rem', lineHeight: 1, letterSpacing: '-0.01em', fontSynthesis: 'none' }}>
                     {destination.label}
                   </span>
-                  {renderFlag(destination.flag, "w-9 h-6 rounded-sm object-cover shadow-md border border-white/10")}
                 </div>
               </div>
 
@@ -1068,13 +1484,24 @@ export default function App() {
         ))}
       </div>
       {currency !== 'USD' && (
-        <p className="text-slate-400 text-xs font-display font-semibold">
-          ≈ <span className="text-white font-black">
-            {active.symbol}{Math.round(total * active.rate).toLocaleString()}
-          </span>
-          {' '}
-          <span className="text-slate-500">/ meta {active.symbol}{Math.round(goal * active.rate).toLocaleString()}</span>
-        </p>
+        <div className="flex flex-col gap-1 mt-1">
+          {/* Tipo de cambio */}
+          <p className="text-slate-500 text-[10px] font-display font-semibold flex items-center gap-1.5">
+            <span className="px-1.5 py-0.5 rounded bg-slate-800 border border-slate-700 text-slate-400">$1 USD</span>
+            <span className="text-slate-600">→</span>
+            <span className="px-1.5 py-0.5 rounded bg-slate-800 border border-slate-700 text-slate-400">
+              {active.symbol}{active.rate.toLocaleString('es-CL', { maximumFractionDigits: 2 })} {active.label}
+            </span>
+          </p>
+          {/* Total convertido */}
+          <p className="text-slate-400 text-xs font-display font-semibold">
+            ≈ <span className="text-white font-black">
+              {active.symbol}{Math.round(total * active.rate).toLocaleString()}
+            </span>
+            {' '}
+            <span className="text-slate-500">/ meta {active.symbol}{Math.round(goal * active.rate).toLocaleString()}</span>
+          </p>
+        </div>
       )}
     </div>
   )
